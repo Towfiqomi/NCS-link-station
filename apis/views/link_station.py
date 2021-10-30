@@ -1,8 +1,8 @@
 from fastapi import APIRouter
-
+from apis.models import link_station
 router = APIRouter()
 
-
-@router.get("/")
-def read_root():
-    return {"Hello": "World"}
+@router.get("/link-station")
+def get_best_linkstation():
+    result = link_station.get_best_linkstation()
+    return result
