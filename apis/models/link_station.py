@@ -1,4 +1,3 @@
-import json
 import math
 from apis.dtos import dtos
 from apis.dataprovider import dataprovider

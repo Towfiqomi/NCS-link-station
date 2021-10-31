@@ -8,7 +8,6 @@ def read_datafile():
     with open(dir_path + "/" + "data.json") as dataFile:
         return json.load(dataFile)
 
-
 def get_data():
     data = read_datafile()
     link_stations = []
