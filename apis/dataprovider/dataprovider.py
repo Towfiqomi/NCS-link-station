@@ -21,13 +21,12 @@ def get_data():
         )
         link_stations.append(list_link_station)
 
-    for device in data["points"]:
+    for point in data["points"]:
         list_device =dtos.Point(
-            x = device[0],
-            y = device[1]
+            x = point[0],
+            y = point[1]
         )
         points.append(list_device)
-
     return dtos.DataEntity(
         link_stations = link_stations,
         points = points
