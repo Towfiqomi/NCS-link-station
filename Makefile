@@ -12,3 +12,6 @@ up: build
 
 down:
 	docker-compose down
+
+lint-fix:
+	docker-compose run -T ncs-api poetry run black apis
