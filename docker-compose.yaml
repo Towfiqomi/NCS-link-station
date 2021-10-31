@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  ncs-api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - "3000:3000"
+    container_name: ncs-api
