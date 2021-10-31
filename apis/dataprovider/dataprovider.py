@@ -12,7 +12,8 @@ def read_datafile():
 def get_data():
     data = read_datafile()
     link_stations = []
-    devices = []
+    points = []
+
     for link_station in data["link_stations"]:
         list_link_station = dtos.LinkStation(
             x = link_station[0],
@@ -21,13 +22,14 @@ def get_data():
         )
         link_stations.append(list_link_station)
 
-    for device in data["devices"]:
-        list_device =dtos.Device(
+    for device in data["points"]:
+        list_device =dtos.Point(
             x = device[0],
             y = device[1]
         )
-        devices.append(list_device)
-    return {
-        "link_stations" : link_stations,
-        "devices": devices
-    }
+        points.append(list_device)
+
+    return dtos.DataEntity(
+        link_stations = link_stations,
+        points = points
+    )

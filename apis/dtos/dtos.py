@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 from pydantic import BaseModel
 
 
@@ -7,6 +7,10 @@ class LinkStation(BaseModel):
     y: int
     reach : int
 
-class Device(BaseModel):
+class Point(BaseModel):
     x: int
     y: int
+
+class DataEntity(BaseModel):
+    link_stations : List[LinkStation]
+    points : List[Point]
