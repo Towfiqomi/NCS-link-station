@@ -23,12 +23,12 @@ def get_best_station(data_entity : dtos.DataEntity):
     point = dtos.Point
     best_station = dtos.LinkStation
     for point_index in range(len(data_entity.points)):
-        for station in range(len(data_entity.link_stations)):
+        for link_station_index in range(len(data_entity.link_stations)):
             best_power = 0
-            power = get_power(data_entity.link_stations[station], data_entity.points[point_index])
+            power = get_power(data_entity.link_stations[link_station_index], data_entity.points[point_index])
             if power > best_power:
                 best_power = power
-                best_station = data_entity.link_stations[station]
+                best_station = data_entity.link_stations[link_station_index]
                 point = data_entity.points[point_index]
         result.append(format(best_power, best_station, point))
     return result
