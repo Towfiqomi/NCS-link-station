@@ -14,7 +14,20 @@ def get_data():
     link_stations = []
     devices = []
     for link_station in data["link_stations"]:
-        link_stations.append([link_station[0], link_station[1], link_station[2]])
+        dto = {
+            "x" : link_station[0],
+            "y" : link_station[1],
+            "reach" : link_station[2]
+        }
+        link_stations.append(dto)
+
     for device in data["devices"]:
-        devices.append([device[0], device[1]])
-    return link_stations, devices
+        dto ={
+            "x" : device[0],
+            "y" : device[1]
+        }
+        devices.append(dto)
+    return {
+        "link_stations" : link_stations,
+        "devices": devices
+    }
