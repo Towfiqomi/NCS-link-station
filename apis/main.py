@@ -3,6 +3,7 @@ from starlette.middleware.cors import CORSMiddleware
 
 from apis import config, routes
 
+
 def application_details() -> FastAPI:
     application = FastAPI(
         title=config.API_NAME,
