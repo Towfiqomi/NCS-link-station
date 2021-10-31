@@ -1,2 +1,6 @@
+import json
+from apis.dataprovider import dataprovider
+
 def get_best_linkstation():
-    return {"Hello": "World"}
+    linkstation, device = dataprovider.get_data()
+    return linkstation, device
