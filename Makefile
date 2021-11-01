@@ -15,3 +15,6 @@ down:
 
 lint-fix:
 	docker-compose run -T ncs-api poetry run black apis
+
+test:
+	docker-compose run -T ncs-api poetry run pytest -s -vv tests
