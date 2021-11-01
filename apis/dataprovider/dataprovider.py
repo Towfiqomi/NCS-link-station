@@ -6,11 +6,21 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
 def read_datafile():
+    """Opens the data.json file the same directory and retruns the data in JSON format
+
+    dir_path :
+        referes to the dir_path varaible returns the current directory of the file
+    """
     with open(dir_path + "/" + "data.json") as dataFile:
         return json.load(dataFile)
 
 
 def get_data():
+    """Receives the data and and converts the data in dtos.DataEntity key value pair format
+
+    #Return:
+        A list of dtos.DataEntity fomatted data consisting of dicts of linkstations and points
+    """
     data = read_datafile()
     link_stations = []
     points = []
