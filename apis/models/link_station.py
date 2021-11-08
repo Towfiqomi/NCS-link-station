@@ -17,7 +17,8 @@ def get_euclidean_distance_for_point(point: dtos.Point, linkstation: dtos.LinkSt
     #Return:
         the euclidean distance between linkstations and points
     """
-    return math.sqrt((point.x - linkstation.x) ** 2 + (point.y - linkstation.y) ** 2)
+    result =  math.sqrt(abs((point.x - linkstation.x) ** 2) + (abs(point.y - linkstation.y) ** 2))
+    return result
 
 
 def get_power(linkstation: dtos.LinkStation, point: dtos.Point):
@@ -34,7 +35,7 @@ def get_power(linkstation: dtos.LinkStation, point: dtos.Point):
         the power by calculating with the distance and linkstation reach
     """
     distance = get_euclidean_distance_for_point(point, linkstation)
-    power = (linkstation.reach - distance) ** 2 if distance < linkstation.reach else 0
+    power = math.pow((linkstation.reach - distance),2) if distance < linkstation.reach else 0
     return power
 
 
@@ -53,7 +54,7 @@ def format(power, best_station: dtos.LinkStation, point: dtos.Point):
     #Return:
         the formatted string of end result
     """
-    if power != 0:
+    if power:
         return "Best link station for point {}, {} is {}, {} with power {}".format(
             point.x, point.y, best_station.x, best_station.y, power
         )
@@ -61,7 +62,7 @@ def format(power, best_station: dtos.LinkStation, point: dtos.Point):
         return "No link station within reach for point {}, {}".format(point.x, point.y)
 
 
-def get_best_station(data_entity: dtos.DataEntity):
+def get_best_station(point: dtos.Point, link_stations: list[dtos.LinkStation]):
     """calculate the best link_station for the given point
 
     #Parameters:
@@ -71,21 +72,17 @@ def get_best_station(data_entity: dtos.DataEntity):
     #Return:
         the formatted results of possible best stations for all given points
     """
-    result = []
-    point = dtos.Point
-    best_station = dtos.LinkStation
-    for point_index in range(len(data_entity.points)):
-        for link_station_index in range(len(data_entity.link_stations)):
-            best_power = 0
-            power = get_power(
-                data_entity.link_stations[link_station_index],
-                data_entity.points[point_index],
-            )
-            if power > best_power:
-                best_power = power
-                best_station = data_entity.link_stations[link_station_index]
-        point = data_entity.points[point_index]
-        result.append(format(best_power, best_station, point))
+    best_power = 0
+    best_station = link_stations[0]
+    for link_station in link_stations:
+        power = get_power(
+                link_station,
+                point,
+        )
+        if power > best_power:
+            best_power = power
+            best_station = link_station
+        result = format(best_power, best_station, point)
     return result
 
 
@@ -95,5 +92,7 @@ def get_best_linkstation():
         the final results of best linkstations for all the given points
     """
     data = dataprovider.get_data()
-    result = get_best_station(data)
+    result = []
+    for point in data.points:
+        result.append(get_best_station(point, data.link_stations))
     return result

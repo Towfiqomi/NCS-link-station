@@ -32,6 +32,10 @@ def get_data():
         link_stations.append(list_link_station)
 
     for point in data["points"]:
-        list_device = dtos.Point(x=point[0], y=point[1])
-        points.append(list_device)
+        list_point = dtos.Point(x=point[0], y=point[1])
+        points.append(list_point)
     return dtos.DataEntity(link_stations=link_stations, points=points)
+
+#  [100, 100],
+#  [15, 10],
+#  [18, 18]
